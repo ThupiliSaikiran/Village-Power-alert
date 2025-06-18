@@ -17,8 +17,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from knox import views as knox_views
+from django.http import JsonResponse
+
+def home(request):
+    return JsonResponse({
+        'message': 'Village Power Alert System is running!',
+        'status': 'success',
+        'api_url': '/api/'
+    })
+
+def test_api(request):
+    return JsonResponse({
+        'message': 'API is working!',
+        'endpoints': {
+            'villages': '/api/villages/',
+            'users': '/api/users/',
+            'outages': '/api/outages/'
+        }
+    })
 
 urlpatterns = [
+    path('', home, name='home'),
+    path('test/', test_api, name='test'),
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
     path('api/auth/login/', knox_views.LoginView.as_view(), name='knox_login'),
