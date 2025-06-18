@@ -7,6 +7,113 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.0/topics/settings/
 
 For the full list of settings and their values, see
+
+Search
+
+Live tail
+GMT+5:30
+
+Menu
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/render/project/src/village_power/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/apps/registry.py", line 116, in populate
+    app_config.import_models()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/apps/config.py", line 269, in import_models
+    self.models_module = import_module(models_module_name)
+                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/contrib/auth/models.py", line 3, in <module>
+    from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/contrib/auth/base_user.py", line 59, in <module>
+    class AbstractBaseUser(models.Model):
+    ...<120 lines>...
+            )
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/models/base.py", line 143, in __new__
+    new_class.add_to_class("_meta", Options(meta, app_label))
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/models/base.py", line 371, in add_to_class
+    value.contribute_to_class(cls, name)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/models/options.py", line 243, in contribute_to_class
+    self.db_table, connection.ops.max_name_length()
+                   ^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/utils/connection.py", line 15, in __getattr__
+    return getattr(self._connections[self._alias], item)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/utils/connection.py", line 62, in __getitem__
+    conn = self.create_connection(alias)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/utils.py", line 193, in create_connection
+    backend = load_backend(db["ENGINE"])
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/utils.py", line 113, in load_backend
+    return import_module("%s.base" % backend_name)
+  File "/usr/local/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/base.py", line 29, in <module>
+    raise ImproperlyConfigured("Error loading psycopg2 or psycopg module")
+django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 or psycopg module
+     ==> Deploying...
+==> Running 'gunicorn village_power.wsgi:application'
+[2025-06-18 17:15:18 +0000] [86] [INFO] Starting gunicorn 21.2.0
+[2025-06-18 17:15:18 +0000] [86] [INFO] Listening at: http://0.0.0.0:10000 (86)
+[2025-06-18 17:15:18 +0000] [86] [INFO] Using worker: sync
+[2025-06-18 17:15:18 +0000] [89] [INFO] Booting worker with pid: 89
+     ==> Your service is live 🎉
+127.0.0.1 - - [18/Jun/2025:17:15:31 +0000] "GET / HTTP/1.1" 404 179 "-" "Go-http-client/2.0"
+127.0.0.1 - - [18/Jun/2025:17:15:41 +0000] "HEAD / HTTP/1.1" 404 179 "-" "Go-http-client/1.1"
+[2025-06-18 17:16:23 +0000] [86] [INFO] Handling signal: term
+[2025-06-18 17:16:23 +0000] [87] [INFO] Worker exiting (pid: 87)
+[2025-06-18 17:16:24 +0000] [86] [INFO] Shutting down: Master
+     ==> No open ports detected, continuing to scan...
+     ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+     ==> Detected service running on port 10000
+     ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+     ==> Deploying...
+==> Running 'gunicorn village_power.wsgi:application'
+[2025-06-18 17:26:53 +0000] [104] [INFO] Starting gunicorn 21.2.0
+[2025-06-18 17:26:53 +0000] [104] [INFO] Listening at: http://0.0.0.0:10000 (104)
+[2025-06-18 17:26:53 +0000] [104] [INFO] Using worker: sync
+[2025-06-18 17:26:53 +0000] [107] [INFO] Booting worker with pid: 107
+127.0.0.1 - - [18/Jun/2025:17:26:56 +0000] "HEAD / HTTP/1.1" 404 179 "-" "Go-http-client/1.1"
+     ==> Your service is live 🎉
+127.0.0.1 - - [18/Jun/2025:17:27:02 +0000] "GET / HTTP/1.1" 404 179 "-" "Go-http-client/2.0"
+[2025-06-18 17:28:00 +0000] [86] [INFO] Handling signal: term
+[2025-06-18 17:28:00 +0000] [89] [INFO] Worker exiting (pid: 89)
+[2025-06-18 17:28:02 +0000] [86] [INFO] Shutting down: Master
+     ==> Detected service running on port 10000
+     ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
@@ -109,6 +216,8 @@ if os.getenv('DATABASE_URL'):
         conn_max_age=600,
         conn_health_checks=True,
     )
+    # Force PostgreSQL engine for psycopg3
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
