@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,16 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'your_default_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+# Update ALLOWED_HOSTS for production
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railway.app',
+    '.onrender.com',
+    '.vercel.app',
+    '.herokuapp.com',
+    '*',  # Keep this for development, remove in production
+]
 
 
 # Application definition
@@ -86,11 +96,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'village_power',
         'USER': 'root',
-        'PASSWORD': 'Saikiran11@',  # Add your MySQL password here
+        'PASSWORD': 'Saikiran11@',  # Your exact same password
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+
+# Use PostgreSQL on Render (production)
+if os.getenv('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
@@ -132,15 +146,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
 # URL Settings
 APPEND_SLASH = True
+
+# Security settings for production
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
 
