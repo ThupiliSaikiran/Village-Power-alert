@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'village_power',
         'USER': 'root',
-        'PASSWORD': 'Saikiran11@',  # Your exact same password
+        'PASSWORD': 'Saikiran11@',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -104,7 +104,11 @@ DATABASES = {
 
 # Use PostgreSQL on Render (production)
 if os.getenv('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+    DATABASES['default'] = dj_database_url.parse(
+        os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
