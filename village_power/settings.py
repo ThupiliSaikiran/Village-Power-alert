@@ -164,6 +164,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -216,7 +217,7 @@ if os.getenv('DATABASE_URL'):
         conn_max_age=600,
         conn_health_checks=True,
     )
-    # Force PostgreSQL engine for psycopg3
+    # Use the correct PostgreSQL engine for psycopg2-binary
     DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
 
 REST_FRAMEWORK = {
