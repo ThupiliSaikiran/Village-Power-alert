@@ -1,0 +1,9 @@
+with open('.env', 'w', encoding='utf-8') as f:
+    f.write('''DEBUG=True
+SECRET_KEY=django-insecure-8x#m9$k2p5v7n3b1q4w6y8z0a2c4e6g8i0k2m4o6q8s0u2w4y6
+DB_NAME=village_power
+DB_USER=root
+DB_PASSWORD=
+DB_HOST=localhost
+DB_PORT=3306
+FAST2SMS_API_KEY=your_api_key_here''')
