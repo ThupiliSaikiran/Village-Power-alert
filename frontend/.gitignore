@@ -96,3 +96,5 @@ Thumbs.db
 # Logs
 logs
 *.log
+
+.vercel
